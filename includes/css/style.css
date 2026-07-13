@@ -1,0 +1,653 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap'); /* Decidi importar do google fonts as fontes: Lato e Playfair. Visto que já tenho esta fonte, não achei necessário incluir uma fonte local. */
+
+
+/* O root é a raiz do documento CSS, e aqui declarei algumas variaveis para ser mais fácil de usar mais à frente */
+:root { 
+ /* As variaveis font-heading e font-body são usadas para aplicar as fontes declaradas acima */
+  --font-heading: 'Playfair Display', serif; 
+  --font-body: 'Lato', sans-serif;
+  
+  /* As variaveis de cor são usadas para manter uma paleta de cores consistente em todo o site, facilitando a manutenção e a personalização futura. */
+  --color-primary: #1f2937;
+  --color-accent: #fbbf24;
+  --color-text: #333;
+  --color-text-light: #555;
+  --color-white: white;
+  --color-bg: #fafafa;
+  --color-bg-secondary: #e5e7eb;
+  --color-shadow: rgba(0,0,0,0.2);
+}
+
+/* Decidi fazer um reset global(*) na margem e no padding, também usei o box-sizing:border-box para facilitar o cálculo de dimensões, assim as caixas vão levar em conta o padding e a borda no cálculo da largura e altura, para mim isso facilita muito. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;/* Cria um efeito de rolagem suave ao clicar nos links âncora, que estão por exemplo no NAV. */
+}
+
+/* Aqui é feita a formatação do body */
+body {
+  font-family: var(--font-body); /* Utilização de variável CSS para a fonte */
+  line-height: 1.6; /* Aumenta o espaçamento entre as linhas para melhor legibilidade */
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Aqui é feita a formatação dos títulos e parágrafos, usando as variáveis de fonte declaradas no :root para manter a consistência tipográfica em todo o site. */
+h1, h2 {
+  font-family: var(--font-heading);
+}
+
+p {
+  font-family: var(--font-body);
+}
+
+/* O header é formatado para ser um elemento fixo no topo da página, com um layout flexível para organizar o conteúdo (logo e navegação) de forma responsiva. A cor de fundo e o espaçamento são definidos para criar uma aparência limpa. */
+header {
+  display: flex; /* Utilização de Flexbox para organizar os elementos lado a lado */
+  justify-content: space-between; /* Empurra o logo para a esquerda e o menu para a direita */
+  align-items: center; /* Centra os elementos */
+  background-color: var(--color-primary);
+  padding: 10px 20px;
+  position: fixed; /* Prende o cabeçalho no topo da página durante o scroll */
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Garante que o cabeçalho fica sempre por cima dos outros elementos da página */
+}
+
+#header-img {
+  height: 50px;
+  border-radius: 8px; /* Arredonda ligeiramente os cantos da imagem */
+}
+
+/* Navegação e links */
+
+nav > ul {
+  display: flex;
+  gap: 20px; /* Define o espaçamento exato entre os links do menu */
+  list-style: none; /* Remove as marcas (bolinhas) padrão das listas HTML */
+}
+
+li > a {
+  color: var(--color-white);
+  font-weight: bold;
+  transition: color 0.3s; /* Adiciona uma animação suave ao mudar de cor no hover */
+  text-decoration: none; /* Remove o sublinhado padrão dos links */
+}
+
+/* O efeito hover é aplicado aos links do menu, mudando a cor para a cor de destaque definida na variável --color-accent. */
+li > a:hover {
+  color: var(--color-accent);
+}
+
+#titulo1 {
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+#titulo2 {
+  color: var(--color-white);
+  margin-bottom: 20px;
+}
+
+/* Classe reaproveitável para todas as secções principais */
+.section {
+  padding: 100px 20px 60px;
+  text-align: center;
+}
+
+#about {
+  background-color: var(--color-bg-secondary);
+  display: flex;
+  flex-direction: column; /* Muda o comportamento do flexbox para organizar itens em coluna (de cima para baixo) */
+  align-items: center;
+}
+
+#about p {
+  max-width: 600px; /* Limita a largura do texto para não ficar difícil de ler em ecrãs grandes */
+  margin: 20px auto; /* Centraliza o parágrafo horizontalmente e adiciona espaçamento vertical */
+}
+
+#video {
+  margin-top: 30px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px var(--color-shadow); /* Adiciona uma sombra subtil */
+  background-color: var(--color-primary);
+}
+
+
+
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Permite que os itens "caiam" para a linha de baixo se não houver espaço na tela */
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.gallery-container img {
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--color-shadow);
+}
+
+/* Estilização específica dos formulários e botões */
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#form select {
+  padding: 10px;
+  width: 250px;
+  border: 2px solid var(--color-primary);
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+#submit, #voltar {
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none; /* Remove a borda padrão dos botões HTML */
+  border-radius: 5px;
+  cursor: pointer; /* Muda o ícone do rato para uma "mão" ao passar por cima */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#submit:hover, #voltar:hover {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.testemunhos-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.testemunho {
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 32px 28px 24px;
+  max-width: 280px;
+  min-width: 220px;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.10);
+  position: relative;
+  text-align: left;
+  transition: transform 0.28s cubic-bezier(.34,1.56,.64,1), box-shadow 0.28s ease;
+  border-top: 4px solid var(--color-accent);
+}
+
+.testemunho:hover {
+  transform: translateY(-6px); /* Eleva o cartão do testemunho ligeiramente para criar um efeito de destaque ao passar o mouse por cima. */
+  box-shadow: 0 14px 40px rgba(0,0,0,0.16);
+}
+
+/* O pseudo-elemento ::before é usado para adicionar uma citação estilizada (aspas) antes do conteúdo do testemunho. A posição absoluta permite que as aspas sejam posicionadas de forma independente do fluxo normal do documento. */
+.testemunho::before {
+  content: '\201C';
+  position: absolute;
+  top: -4px;
+  left: 18px;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+}
+
+.testemunho p {
+  font-style: italic;
+  color: var(--color-text-light);
+  margin: 16px 0 14px;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  max-width: none;
+}
+
+.testemunho strong {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 40px 36px;
+  max-width: 480px;
+  margin: 32px auto 0;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+  gap: 4px;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#name, #email, #message, #assunto {
+  padding: 12px 14px;
+  width: 100%;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.2s;
+  outline: none;
+}
+
+#message {
+  resize: vertical;
+  min-height: 110px;
+}
+
+/* O efeito de foco é aplicado aos campos do formulário, mudando a cor da borda para a cor de destaque, alterando o fundo para branco e adicionando uma sombra suave para destacar o campo ativo. */
+#name:focus, #email:focus, #message:focus, #assunto:focus {
+  border-color: var(--color-accent);
+  background-color: var(--color-white);
+  box-shadow: 0 0 0 4px rgba(251,191,36,0.18);
+}
+
+#contact-form #submit {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin-top: 8px;
+  letter-spacing: 0.03em;
+}
+
+#quinta-regaleira, #palacio-da-pena, #castelo-dos-mouros {
+  width: 700px;
+  max-width: 100%; /* Garante que a imagem é responsiva e nunca ultrapassa o tamanho da janela do utilizador */
+  height: auto; /* Mantém a proporção correta da imagem */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--color-shadow);
+}
+
+.button-voltar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#expetativa{
+  margin-top: 40px;
+  font-style: italic;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-secondary);
+}
+
+p{
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Estilos do rodapé */
+footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  padding: 20px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+  padding: 28px 36px;
+  background-color: var(--color-white);
+}
+
+.packs-grid {
+  /* Horizontal scrollable container with snap selection for each item */
+  display: flex;
+  flex-direction: row;
+  gap: 12px; /* space between items */
+  margin: 18px auto 0;
+  max-width: 1100px;
+  padding: 0 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+/* Each pack/item should be a fixed-width, non-shrinking flex child so it can be scrolled into view */
+.pack-item {
+  scroll-snap-align: start;
+  flex: 0 0 260px;
+  min-width: 260px;
+}
+
+.pack-card {
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+}
+
+.pack-card .pack-title {
+  margin-bottom: 12px;
+  color: var(--color-primary);
+  font-size: 1.25rem;
+}
+
+.pack-card .pack-duracao,
+.pack-card .pack-desc,
+.pack-card .pack-preco,
+.pack-card .pack-actions {
+  margin-top: 12px;
+}
+
+.pack-card .pack-preco {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pack-card .preco-valor {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.15rem;
+}
+
+.pack-card .btn-detalhes,
+.pack-card .btn-carrinho {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 0;
+  margin-top: 12px;
+  color: var(--color-accent);
+}
+
+.btn-todos, .btn-primary, .btn-secondary, .btn {
+  padding: 12px 0;
+  margin-top: 12px;
+  color: var(--color-accent);
+  border: none;
+  background: none;
+  cursor: pointer;
+} 
+
+.inner-page-hero{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 90px;
+}
+
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  padding: 28px 36px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+}
+
+.admin-panel a {
+  color: var(--color-primary);
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.admin-panel-title {
+  text-align: center;
+  margin-top: 100px;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+}
+
+.btn-add-product {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-add-product a {
+  padding: 12px 20px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.carrinho-table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.carrinho-table th,
+.carrinho-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.produtos-table {
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.produtos-table th,
+.produtos-table td {
+  border: 1px solid var(--color-bg-secondary);
+  padding: 12px 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.produtos-table th {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary);
+}
+
+.produtos-table td {
+  background-color: var(--color-white);
+}
+
+.produtos-table a {
+  color: var(--color-primary);
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+  padding: 28px 36px;
+  background-color: var(--color-white);
+}
+
+.add-category-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.classes-table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.classes-table th,
+.classes-table td {
+  border: 1px solid var(--color-bg-secondary);
+  padding: 12px 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.classes-table th {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary);
+}
+
+.classes-table td {
+  background-color: var(--color-white);
+}
+
+.classes-table a {
+  color: var(--color-primary);
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+
+.carrinho-cta {
+  text-align: center;
+  margin-top: 18px;
+}
+
+/* Media Query */
+/* Regras aplicadas apenas a ecrãs com largura máxima de 768px (Telemóveis e Tablets pequenos) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Empilha o logo e o menu em vez de os colocar lado a lado */
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  #header-img {
+    height: 44px; /* Reduz o logótipo para poupar espaço vertical */
+  }
+
+  nav > ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  nav > ul li {
+    margin: 4px 0;
+  }
+
+  nav > ul li a {
+    display: inline-block; /* Permite aplicar tamanhos reais a um elemento 'a', ou seja transforma um elemento a para block  */
+    padding: 6px 8px;
+  }
+
+ 
+  body {
+    padding-top: 90px; /* Aumenta a margem superior para compensar o cabeçalho mais alto na versão mobile */
+  }
+
+  .section {
+    padding: 120px 16px 40px;
+  }
+
+  #expetativa {
+    margin-top: 158px;
+  }
+
+  .gallery-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .gallery-container img {
+    width: 100%; /* Força a imagem a ocupar toda a largura disponível no telemóvel */
+    max-width: 420px;
+    height: auto;
+  }
+
+  
+  #video, iframe {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .testemunho {
+    max-width: 100%;
+    width: 92%;
+  }
+
+  #contact-form {
+    padding: 28px 18px;
+    width: 96%;
+  }
+
+  #email, #form select, #name, #message, #assunto {
+    width: 92%;
+    max-width: 420px;
+  }
+
+  #submit, #voltar, .button-voltar button {
+    width: 92%;
+    max-width: 420px;
+    padding: 12px 16px;
+  }
+
+
+  #quinta-regaleira, #palacio-da-pena, #castelo-dos-mouros {
+    width: 100%;
+  }
+}
