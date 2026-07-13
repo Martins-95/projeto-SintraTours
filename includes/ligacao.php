@@ -3,8 +3,8 @@
 
 $host     = 'localhost';
 $dbname   = 'sintra_tours';
-$username = 'root';
-$password = 'root';        
+$username = '';
+$password = '';        
 
 $conn = new mysqli($host, $username, $password, $dbname);
 $conn->set_charset('utf8mb4');
